@@ -1,0 +1,68 @@
+controller:
+  numExecutors: 0
+  serviceType: LoadBalancer
+  loadBalancerSourceRanges:
+    - 192.30.252.0/22
+    - 185.199.108.0/22
+    - 140.82.112.0/20
+    - 143.55.64.0/20
+    - 9.234.106.48/28
+    - 9.234.98.160/28
+    - 9.234.98.176/28
+  additionalPlugins:
+    - job-dsl
+    - github
+    - pipeline-stage-view
+  JCasC:
+    configScripts:
+      jobs: |
+        jobs:
+          - script: >
+              pipelineJob('website') {
+                properties {
+                  pipelineTriggers {
+                    triggers {
+                      githubPush()
+                    }
+                  }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote { url('https://github.com/rohanyagnik10/cambridge-aerospace-website.git') }
+                        branch('*/main')
+                      }
+                    }
+                    scriptPath('Jenkinsfile')
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('terraform') {
+                properties {
+                  pipelineTriggers {
+                    triggers {
+                      githubPush()
+                    }
+                  }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote { url('https://github.com/rohanyagnik10/flighttest-platform.git') }
+                        branch('*/main')
+                      }
+                    }
+                    scriptPath('Jenkinsfile')
+                  }
+                }
+              }
+
+persistence:
+  enabled: false
+
+serviceAccountAgent:
+  create: true
+  name: jenkins-agent
