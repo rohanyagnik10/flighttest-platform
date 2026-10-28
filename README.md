@@ -45,9 +45,9 @@ Ranges don't overlap so they can be connected later. Full account plan is in acc
 - Controller has 0 executors. Builds run in pods that get deleted after
 - Jobs are created from config with job-dsl, nothing is set up by clicking
 - Agent pods get AWS access through EKS Pod Identity, no access keys stored anywhere
-- Jenkins is open on its load balancer url. Admin password:
+- Jenkins is open on its load balancer url. The admin password is kept in SSM at /jenkins/admin-password, not in git:
   ```
-  kubectl -n jenkins get secret jenkins -o jsonpath='{.data.jenkins-admin-password}' | base64 -d; echo
+  aws ssm get-parameter --name /jenkins/admin-password --with-decryption --query Parameter.Value --output text
   ```
 
 ## What I would change for real

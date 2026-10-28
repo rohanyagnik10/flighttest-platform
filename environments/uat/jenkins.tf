@@ -34,5 +34,14 @@ resource "helm_release" "jenkins" {
 
     values = [file("${path.module}/jenkins-values.yaml")]
 
+    set_sensitive {
+        name = "controller.admin.password"
+        value = data.aws_ssm_parameter.jenkins_password.value
+    }
+
     depends_on = [module.eks]
+}
+
+data "aws_ssm_parameter" "jenkins_password" {
+    name = "/jenkins/admin-password"
 }
