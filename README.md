@@ -47,7 +47,7 @@ Ranges don't overlap so they can be connected later. Full account plan is in acc
 - Agent pods get AWS access through EKS Pod Identity, no access keys stored anywhere
 - Jenkins is open on its load balancer url. Admin password:
   ```
-  kubectl -n jenkins get secret jenkins -o jsonpath='{.data.jenkins-admin-password}' | base64 -d
+  kubectl -n jenkins get secret jenkins -o jsonpath='{.data.jenkins-admin-password}' | base64 -d; echo
   ```
 
 ## What I would change for real
