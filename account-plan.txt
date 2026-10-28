@@ -1,0 +1,24 @@
+management
+No workloads. Organisation policies only.
+
+security
+Detection and security investigation. Read access across accounts.
+
+logs
+Central write-once audit logs. Workload accounts cannot delete their own evidence.
+
+devops
+Terraform state, CI/CD, Jenkins, and shared services.
+CIDR: 10.8.0.0/16
+
+uat
+Testing environment.
+CIDR: 10.0.0.0/16
+
+preprod
+Release validation environment.
+CIDR: 10.3.0.0/16
+
+prod
+Production environment.
+CIDR: 10.4.0.0/16
