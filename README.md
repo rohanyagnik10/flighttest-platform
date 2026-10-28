@@ -45,9 +45,8 @@ Ranges don't overlap so they can be connected later. Full account plan is in acc
 - Controller has 0 executors. Builds run in pods that get deleted after
 - Jobs are created from config with job-dsl, nothing is set up by clicking
 - Agent pods get AWS access through EKS Pod Identity, no access keys stored anywhere
-- The load balancer only lets in GitHub webhook IPs. For the UI use port-forward:
+- Jenkins is open on its load balancer url. Admin password:
   ```
-  kubectl -n jenkins port-forward svc/jenkins 8080:8080
   kubectl -n jenkins get secret jenkins -o jsonpath='{.data.jenkins-admin-password}' | base64 -d
   ```
 
@@ -58,4 +57,4 @@ Ranges don't overlap so they can be connected later. Full account plan is in acc
 - One NAT gateway per environment. Prod should have one per AZ
 - uat RDS has no backups and no multi-az
 - Jenkins has no persistent volume so build history is lost on restart
-- Webhook is http not https
+- Jenkins is open to the internet over http. It should be https and only reachable from the office or a vpn
