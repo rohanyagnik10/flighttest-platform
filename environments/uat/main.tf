@@ -17,7 +17,7 @@ module "eks" {
     source = "../../modules/eks"
     name = "uat"
     subnet_ids = module.network.private_subnet_ids
-    instance_type = "t3.medium"
+    instance_type = "t3.small"
     node_count = 2
     admin_arns = local.admins
 

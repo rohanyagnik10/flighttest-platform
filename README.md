@@ -16,7 +16,7 @@ Jenkinsfile         init, validate, plan, approve, apply
 
 | env     | cidr        | nodes                        |
 |---------|-------------|------------------------------|
-| uat     | 10.0.0.0/16 | 2 x t3.medium (runs jenkins) |
+| uat     | 10.0.0.0/16 | 2 x t3.small (runs jenkins)      |
 | preprod | 10.3.0.0/16 | 1 x t3.small                 |
 | prod    | 10.4.0.0/16 | 1 x t3.small                 |
 
